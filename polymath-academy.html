@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polymath Academy | Where Science Becomes Magic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Quicksand:wght@300;400;500;600;700&family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --magic-purple: #6B21A8;
+            --cosmic-blue: #1E3A5F;
+            --golden-spark: #F59E0B;
+            --emerald-glow: #059669;
+            --rose-wonder: #DB2777;
+            --midnight: #0F172A;
+            --starlight: #F8FAFC;
+            --nebula-gradient: linear-gradient(135deg, #1E3A5F 0%, #6B21A8 50%, #DB2777 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Quicksand', sans-serif; background: var(--midnight); color: var(--starlight); overflow-x: hidden; }
+        
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; width: 3px; height: 3px; background: white; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
+        
+        nav { position: fixed; top: 0; width: 100%; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 900; background: var(--nebula-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--starlight); text-decoration: none; font-weight: 500; transition: all 0.3s; }
+        .nav-links a:hover { color: var(--golden-spark); }
+        .book-btn { background: var(--nebula-gradient); color: white; padding: 0.7rem 1.8rem; border: none; border-radius: 50px; font-family: 'Quicksand', sans-serif; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .book-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(107, 33, 168, 0.6); }
+        
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 8rem 5% 4rem; position: relative; background: radial-gradient(ellipse at center, rgba(107, 33, 168, 0.2) 0%, transparent 70%); }
+        .hero-badge { background: rgba(245, 158, 11, 0.2); border: 1px solid var(--golden-spark); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.9rem; color: var(--golden-spark); margin-bottom: 2rem; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero h1 span { background: var(--nebula-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-tagline { font-family: 'Satisfy', cursive; font-size: 1.8rem; color: var(--golden-spark); margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.1rem; max-width: 700px; opacity: 0.9; margin-bottom: 3rem; line-height: 1.8; }
+        .hero-buttons { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+        .primary-btn { background: var(--nebula-gradient); color: white; padding: 1rem 2.5rem; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-decoration: none; }
+        .secondary-btn { background: transparent; color: white; padding: 1rem 2.5rem; border: 2px solid rgba(255,255,255,0.3); border-radius: 50px; font-size: 1.1rem; font-weight: 700; text-decoration: none; transition: all 0.3s; }
+        .secondary-btn:hover { border-color: var(--golden-spark); color: var(--golden-spark); }
+        
+        .floating-icons { position: absolute; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+        .float-icon { position: absolute; font-size: 2rem; animation: floatAround 20s linear infinite; opacity: 0.3; }
+        @keyframes floatAround { 0% { transform: translateY(100vh) rotate(0deg); } 100% { transform: translateY(-100vh) rotate(360deg); } }
+        
+        .stats { display: flex; justify-content: center; gap: 4rem; padding: 4rem 5%; flex-wrap: wrap; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 900; background: var(--nebula-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { font-size: 1rem; opacity: 0.7; margin-top: 0.5rem; }
+        
+        section { padding: 5rem 5%; position: relative; z-index: 1; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-tag { color: var(--golden-spark); font-weight: 600; letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 1rem; }
+        .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; margin-bottom: 1rem; }
+        .section-subtitle { font-size: 1.1rem; opacity: 0.8; max-width: 600px; margin: 0 auto; }
+        
+        .about { background: linear-gradient(180deg, transparent, rgba(107, 33, 168, 0.1), transparent); }
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .about-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; transition: all 0.4s; }
+        .about-card:hover { transform: translateY(-10px); border-color: rgba(107, 33, 168, 0.5); box-shadow: 0 20px 50px rgba(107, 33, 168, 0.2); }
+        .about-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .about-card h3 { font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 0.8rem; color: var(--golden-spark); }
+        .about-card p { opacity: 0.8; line-height: 1.7; font-size: 0.95rem; }
+        
+        .experiments { background: radial-gradient(ellipse at top, rgba(219, 39, 119, 0.1), transparent 50%); }
+        .experiment-categories { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+        .category-btn { padding: 0.7rem 1.3rem; border: 2px solid rgba(255,255,255,0.2); background: transparent; color: white; border-radius: 50px; cursor: pointer; font-family: 'Quicksand', sans-serif; font-weight: 600; transition: all 0.3s; }
+        .category-btn.active, .category-btn:hover { background: var(--nebula-gradient); border-color: transparent; }
+        
+        .experiments-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; max-width: 1400px; margin: 0 auto; }
+        .experiment-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; transition: all 0.4s; }
+        .experiment-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .experiment-header { padding: 1.2rem; background: var(--nebula-gradient); display: flex; align-items: center; gap: 0.8rem; }
+        .experiment-icon { font-size: 2rem; }
+        .experiment-header h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; flex: 1; }
+        .experiment-badge { background: rgba(255,255,255,0.2); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+        .experiment-content { padding: 1.2rem; }
+        .experiment-content p { opacity: 0.8; line-height: 1.6; margin-bottom: 0.8rem; font-size: 0.9rem; }
+        .concepts { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .concept-tag { background: rgba(245, 158, 11, 0.2); color: var(--golden-spark); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        
+        .booking { background: linear-gradient(180deg, transparent, rgba(5, 150, 105, 0.1), transparent); }
+        .booking-container { max-width: 900px; margin: 0 auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 2.5rem; }
+        .booking-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .info-item { text-align: center; padding: 1.2rem; background: rgba(255,255,255,0.03); border-radius: 15px; }
+        .info-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+        .info-item h4 { color: var(--golden-spark); margin-bottom: 0.3rem; font-size: 1rem; }
+        .info-item p { font-size: 0.9rem; opacity: 0.8; }
+        .booking-form { display: grid; gap: 1.2rem; }
+        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-group label { font-weight: 600; color: var(--golden-spark); font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea { padding: 0.9rem; border: 2px solid rgba(255,255,255,0.1); border-radius: 10px; background: rgba(255,255,255,0.05); color: white; font-family: 'Quicksand', sans-serif; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--magic-purple); }
+        .form-group select option { background: var(--midnight); }
+        .submit-btn { background: var(--nebula-gradient); color: white; padding: 1rem 2.5rem; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'Quicksand', sans-serif; margin-top: 1rem; }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(107, 33, 168, 0.5); }
+        
+        .testimonials { background: radial-gradient(ellipse at bottom, rgba(245, 158, 11, 0.1), transparent 50%); }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .testimonial-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; position: relative; }
+        .quote-icon { font-size: 3rem; opacity: 0.2; position: absolute; top: 1rem; right: 1.5rem; }
+        .testimonial-text { font-style: italic; line-height: 1.8; margin-bottom: 1.5rem; opacity: 0.9; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .author-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--nebula-gradient); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .author-info h4 { color: var(--golden-spark); }
+        .author-info span { font-size: 0.9rem; opacity: 0.7; }
+        
+        .contact { background: linear-gradient(180deg, transparent, rgba(30, 58, 95, 0.3)); }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        .contact-item { text-align: center; }
+        .contact-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+        .contact-item h4 { color: var(--golden-spark); margin-bottom: 0.3rem; font-size: 1.1rem; }
+        .contact-item p { opacity: 0.8; font-size: 0.95rem; }
+        .contact-item a { color: var(--starlight); text-decoration: none; }
+        .contact-item a:hover { color: var(--golden-spark); }
+        
+        footer { background: rgba(0,0,0,0.3); padding: 3rem 5%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-logo { font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 900; background: var(--nebula-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.8rem; }
+        .footer-tagline { font-family: 'Satisfy', cursive; font-size: 1.1rem; color: var(--golden-spark); margin-bottom: 1.5rem; }
+        .social-links { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .social-links a { width: 45px; height: 45px; border: 2px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: white; text-decoration: none; transition: all 0.3s; }
+        .social-links a:hover { background: var(--nebula-gradient); border-color: transparent; transform: translateY(-5px); }
+        .copyright { opacity: 0.6; font-size: 0.85rem; }
+        
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .menu-toggle span { width: 25px; height: 3px; background: white; border-radius: 3px; }
+        
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background: var(--midnight); flex-direction: column; justify-content: center; align-items: center; transition: left 0.3s; }
+            .nav-links.active { left: 0; }
+            .menu-toggle { display: flex; }
+            .stats { gap: 2rem; }
+            .experiments-grid { grid-template-columns: 1fr; }
+            .booking-container { padding: 1.5rem; }
+        }
+        
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--nebula-gradient); z-index: 9999; width: 0%; }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="stars" id="stars"></div>
+
+    <nav>
+        <div class="logo">✨ Polymath Academy</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experiments">Experiments</a></li>
+            <li><a href="#booking">Book Now</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="book-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book a Visit</button>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="floating-icons">
+            <span class="float-icon" style="left:10%;animation-delay:0s;">🧪</span>
+            <span class="float-icon" style="left:25%;animation-delay:3s;">🔬</span>
+            <span class="float-icon" style="left:40%;animation-delay:6s;">🧲</span>
+            <span class="float-icon" style="left:55%;animation-delay:9s;">⚗️</span>
+            <span class="float-icon" style="left:70%;animation-delay:12s;">🌡️</span>
+            <span class="float-icon" style="left:85%;animation-delay:15s;">🔭</span>
+        </div>
+        <div class="hero-badge">🎓 Education Redefined for Classes 6-12</div>
+        <h1>Where <span>Science</span><br>Becomes <span>Magic</span></h1>
+        <p class="hero-tagline">"Developing Polymath Minds Through Wonder"</p>
+        <p>Welcome to Polymath Academy's Science & Math Lab — where every experiment feels like magic! We transform complex concepts into unforgettable experiences through hands-on demonstrations covering Physics, Chemistry, Biology, and Mathematics.</p>
+        <div class="hero-buttons">
+            <a href="#booking" class="primary-btn">🗓️ Book Your Sunday Visit</a>
+            <a href="#experiments" class="secondary-btn">Explore Experiments</a>
+        </div>
+    </section>
+
+    <div class="stats">
+        <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">Magic Experiments</div></div>
+        <div class="stat-item"><div class="stat-number">50</div><div class="stat-label">Students per Session</div></div>
+        <div class="stat-item"><div class="stat-number">4</div><div class="stat-label">Science Branches</div></div>
+        <div class="stat-item"><div class="stat-number">7</div><div class="stat-label">Class Levels (6-12)</div></div>
+    </div>
+
+    <section class="about" id="about">
+        <div class="section-header fade-in">
+            <p class="section-tag">✨ Our Philosophy</p>
+            <h2 class="section-title">Developing Polymaths Through Experience</h2>
+            <p class="section-subtitle">Every child has the potential to become a polymath — excelling across disciplines through curiosity and hands-on learning.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-card fade-in">
+                <div class="about-icon">🎭</div>
+                <h3>Science as Magic</h3>
+                <p>Every experiment creates that "wow" moment. When students see water defy gravity or fire change colors, they experience magic that sparks lifelong curiosity.</p>
+            </div>
+            <div class="about-card fade-in">
+                <div class="about-icon">🧠</div>
+                <h3>Polymath Development</h3>
+                <p>We integrate Physics, Chemistry, Biology, and Mathematics. Students discover how all sciences connect, developing a truly polymath perspective.</p>
+            </div>
+            <div class="about-card fade-in">
+                <div class="about-icon">🔬</div>
+                <h3>Hands-On Learning</h3>
+                <p>Every student participates actively — mixing chemicals, building circuits, observing cells, solving puzzles. Learning happens through doing.</p>
+            </div>
+            <div class="about-card fade-in">
+                <div class="about-icon">📚</div>
+                <h3>CBSE/NCERT Aligned</h3>
+                <p>All experiments align with curriculum for Classes 6-12. Students reinforce classroom concepts and excel academically.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="experiments" id="experiments">
+        <div class="section-header fade-in">
+            <p class="section-tag">🧪 Our Magic Arsenal</p>
+            <h2 class="section-title">50+ Experiments That Feel Like Magic</h2>
+            <p class="section-subtitle">Covering Physics, Chemistry, Biology, and Math across all class levels.</p>
+        </div>
+
+        <div class="experiment-categories fade-in">
+            <button class="category-btn active" onclick="filterExperiments('all')">All</button>
+            <button class="category-btn" onclick="filterExperiments('physics')">⚡ Physics</button>
+            <button class="category-btn" onclick="filterExperiments('chemistry')">🧪 Chemistry</button>
+            <button class="category-btn" onclick="filterExperiments('biology')">🧬 Biology</button>
+            <button class="category-btn" onclick="filterExperiments('math')">📐 Math</button>
+        </div>
+
+        <div class="experiments-grid">
+            <!-- Physics -->
+            <div class="experiment-card fade-in" data-category="physics">
+                <div class="experiment-header"><span class="experiment-icon">🎈</span><h3>Floating Ball Magic</h3><span class="experiment-badge">Class 6-8</span></div>
+                <div class="experiment-content"><p>Watch a ball float in mid-air using Bernoulli's principle! Learn how air pressure makes airplanes fly.</p><div class="concepts"><span class="concept-tag">Air Pressure</span><span class="concept-tag">Bernoulli's Principle</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="physics">
+                <div class="experiment-header"><span class="experiment-icon">🥚</span><h3>Egg in a Bottle</h3><span class="experiment-badge">Class 6-9</span></div>
+                <div class="experiment-content"><p>A hard-boiled egg gets "sucked" into a bottle with no hands touching it! Atmospheric pressure revealed.</p><div class="concepts"><span class="concept-tag">Atmospheric Pressure</span><span class="concept-tag">Combustion</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="physics">
+                <div class="experiment-header"><span class="experiment-icon">🧲</span><h3>Magnetic Levitation</h3><span class="experiment-badge">Class 7-10</span></div>
+                <div class="experiment-content"><p>Make a pencil float in mid-air using repelling magnets! Explore magnetic fields and forces.</p><div class="concepts"><span class="concept-tag">Magnetism</span><span class="concept-tag">Magnetic Fields</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="physics">
+                <div class="experiment-header"><span class="experiment-icon">🌈</span><h3>Newton's Prism</h3><span class="experiment-badge">Class 6-10</span></div>
+                <div class="experiment-content"><p>Split white light into a rainbow spectrum! Discover light composition and refraction.</p><div class="concepts"><span class="concept-tag">Light Refraction</span><span class="concept-tag">Spectrum</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="physics">
+                <div class="experiment-header"><span class="experiment-icon">⚡</span><h3>Static Electricity Show</h3><span class="experiment-badge">Class 6-8</span></div>
+                <div class="experiment-content"><p>Bend water with a balloon! Make confetti dance! Create lightning in a jar!</p><div class="concepts"><span class="concept-tag">Static Electricity</span><span class="concept-tag">Electric Charge</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="physics">
+                <div class="experiment-header"><span class="experiment-icon">🚀</span><h3>Bottle Rocket Launch</h3><span class="experiment-badge">Class 8-11</span></div>
+                <div class="experiment-content"><p>Launch rockets using water and air pressure! Newton's Third Law in action.</p><div class="concepts"><span class="concept-tag">Newton's Laws</span><span class="concept-tag">Propulsion</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="physics">
+                <div class="experiment-header"><span class="experiment-icon">🔊</span><h3>Sound Wave Visualizer</h3><span class="experiment-badge">Class 8-10</span></div>
+                <div class="experiment-content"><p>See sound waves make patterns in sand! Witness resonance and frequency in action.</p><div class="concepts"><span class="concept-tag">Sound Waves</span><span class="concept-tag">Resonance</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="physics">
+                <div class="experiment-header"><span class="experiment-icon">💡</span><h3>Lemon Battery</h3><span class="experiment-badge">Class 7-9</span></div>
+                <div class="experiment-content"><p>Power an LED using lemons! Learn how chemical energy becomes electrical energy.</p><div class="concepts"><span class="concept-tag">Electrochemistry</span><span class="concept-tag">Circuits</span></div></div>
+            </div>
+
+            <!-- Chemistry -->
+            <div class="experiment-card fade-in" data-category="chemistry">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#059669,#1E3A5F);"><span class="experiment-icon">🐘</span><h3>Elephant Toothpaste</h3><span class="experiment-badge">Class 6-10</span></div>
+                <div class="experiment-content"><p>Massive foam explosion! Catalytic decomposition of hydrogen peroxide creates toothpaste for elephants!</p><div class="concepts"><span class="concept-tag">Catalysts</span><span class="concept-tag">Decomposition</span><span class="concept-tag">Exothermic</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="chemistry">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#059669,#1E3A5F);"><span class="experiment-icon">🔥</span><h3>Rainbow Fire</h3><span class="experiment-badge">Class 9-12</span></div>
+                <div class="experiment-content"><p>Flames dance in green, blue, red, purple! Metal salts create spectacular flame tests.</p><div class="concepts"><span class="concept-tag">Flame Tests</span><span class="concept-tag">Metal Ions</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="chemistry">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#059669,#1E3A5F);"><span class="experiment-icon">✨</span><h3>Luminol Glow</h3><span class="experiment-badge">Class 10-12</span></div>
+                <div class="experiment-content"><p>Create an eerie blue glow in the dark! Chemiluminescence used in forensic science.</p><div class="concepts"><span class="concept-tag">Chemiluminescence</span><span class="concept-tag">Oxidation</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="chemistry">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#059669,#1E3A5F);"><span class="experiment-icon">📝</span><h3>Invisible Ink</h3><span class="experiment-badge">Class 6-9</span></div>
+                <div class="experiment-content"><p>Write secret messages that appear when heated! Explore oxidation and pH indicators.</p><div class="concepts"><span class="concept-tag">Oxidation</span><span class="concept-tag">pH Indicators</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="chemistry">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#059669,#1E3A5F);"><span class="experiment-icon">🌋</span><h3>Volcano Eruption</h3><span class="experiment-badge">Class 6-8</span></div>
+                <div class="experiment-content"><p>Create bubbling volcanic eruption with baking soda and vinegar! Classic acid-base reaction.</p><div class="concepts"><span class="concept-tag">Acid-Base</span><span class="concept-tag">CO₂ Production</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="chemistry">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#059669,#1E3A5F);"><span class="experiment-icon">🎨</span><h3>Color-Changing Magic</h3><span class="experiment-badge">Class 7-11</span></div>
+                <div class="experiment-content"><p>Pour liquid and watch it change colors through the rainbow! pH indicators in action.</p><div class="concepts"><span class="concept-tag">pH Scale</span><span class="concept-tag">Indicators</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="chemistry">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#059669,#1E3A5F);"><span class="experiment-icon">🧊</span><h3>Instant Ice</h3><span class="experiment-badge">Class 8-11</span></div>
+                <div class="experiment-content"><p>Turn water into ice instantly! Supercooling and crystallization demonstrated dramatically.</p><div class="concepts"><span class="concept-tag">Supercooling</span><span class="concept-tag">Crystallization</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="chemistry">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#059669,#1E3A5F);"><span class="experiment-icon">💎</span><h3>Crystal Growing</h3><span class="experiment-badge">Class 7-10</span></div>
+                <div class="experiment-content"><p>Grow sparkling crystals from solutions! Understand saturation and crystallization.</p><div class="concepts"><span class="concept-tag">Saturation</span><span class="concept-tag">Crystal Formation</span></div></div>
+            </div>
+
+            <!-- Biology -->
+            <div class="experiment-card fade-in" data-category="biology">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#DB2777,#6B21A8);"><span class="experiment-icon">🧬</span><h3>DNA Extraction</h3><span class="experiment-badge">Class 9-12</span></div>
+                <div class="experiment-content"><p>Extract real DNA from strawberries you can see and touch! The blueprint of life revealed.</p><div class="concepts"><span class="concept-tag">DNA Structure</span><span class="concept-tag">Cell Biology</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="biology">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#DB2777,#6B21A8);"><span class="experiment-icon">🥚</span><h3>Osmosis Egg</h3><span class="experiment-badge">Class 8-11</span></div>
+                <div class="experiment-content"><p>Watch an egg shrink in syrup and swell in water! Semi-permeable membranes demonstrated.</p><div class="concepts"><span class="concept-tag">Osmosis</span><span class="concept-tag">Cell Membrane</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="biology">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#DB2777,#6B21A8);"><span class="experiment-icon">🔬</span><h3>Cell Division Live</h3><span class="experiment-badge">Class 9-12</span></div>
+                <div class="experiment-content"><p>Observe mitosis in onion root tips under microscope! Watch life in action.</p><div class="concepts"><span class="concept-tag">Mitosis</span><span class="concept-tag">Cell Cycle</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="biology">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#DB2777,#6B21A8);"><span class="experiment-icon">🌸</span><h3>Color-Changing Flowers</h3><span class="experiment-badge">Class 6-9</span></div>
+                <div class="experiment-content"><p>Transform white flowers into rainbow colors overnight! Observe transpiration.</p><div class="concepts"><span class="concept-tag">Transpiration</span><span class="concept-tag">Xylem</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="biology">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#DB2777,#6B21A8);"><span class="experiment-icon">🌱</span><h3>Photosynthesis Bubbles</h3><span class="experiment-badge">Class 7-10</span></div>
+                <div class="experiment-content"><p>Watch oxygen bubbles rise from plants under light! See photosynthesis happen.</p><div class="concepts"><span class="concept-tag">Photosynthesis</span><span class="concept-tag">Oxygen</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="biology">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#DB2777,#6B21A8);"><span class="experiment-icon">🫀</span><h3>Heart Rate Science</h3><span class="experiment-badge">Class 7-10</span></div>
+                <div class="experiment-content"><p>Measure pulse before and after exercise! Understand circulatory system responses.</p><div class="concepts"><span class="concept-tag">Circulation</span><span class="concept-tag">Heart Rate</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="biology">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#DB2777,#6B21A8);"><span class="experiment-icon">🦷</span><h3>Enzyme Action</h3><span class="experiment-badge">Class 9-12</span></div>
+                <div class="experiment-content"><p>Watch salivary amylase break down starch! Enzyme catalysis demonstrated.</p><div class="concepts"><span class="concept-tag">Enzymes</span><span class="concept-tag">Digestion</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="biology">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#DB2777,#6B21A8);"><span class="experiment-icon">🌿</span><h3>Chromatography</h3><span class="experiment-badge">Class 8-12</span></div>
+                <div class="experiment-content"><p>Separate plant pigments into colorful bands! See chlorophyll and carotenoids.</p><div class="concepts"><span class="concept-tag">Pigments</span><span class="concept-tag">Separation</span></div></div>
+            </div>
+
+            <!-- Math -->
+            <div class="experiment-card fade-in" data-category="math">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#F59E0B,#DB2777);"><span class="experiment-icon">🎯</span><h3>Mind Reading Numbers</h3><span class="experiment-badge">Class 6-9</span></div>
+                <div class="experiment-content"><p>"Think of any number..." Correctly guess their answer every time! Algebra revealed.</p><div class="concepts"><span class="concept-tag">Algebra</span><span class="concept-tag">Variables</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="math">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#F59E0B,#DB2777);"><span class="experiment-icon">📅</span><h3>Calendar Calculator</h3><span class="experiment-badge">Class 7-10</span></div>
+                <div class="experiment-content"><p>Calculate sum of any 3x3 calendar box faster than a calculator! Pattern magic.</p><div class="concepts"><span class="concept-tag">Patterns</span><span class="concept-tag">Mental Math</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="math">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#F59E0B,#DB2777);"><span class="experiment-icon">🔢</span><h3>Magic Squares</h3><span class="experiment-badge">Class 6-10</span></div>
+                <div class="experiment-content"><p>Create squares where every row, column, diagonal adds to the same number!</p><div class="concepts"><span class="concept-tag">Number Patterns</span><span class="concept-tag">Logic</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="math">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#F59E0B,#DB2777);"><span class="experiment-icon">🔗</span><h3>Möbius Strip</h3><span class="experiment-badge">Class 7-11</span></div>
+                <div class="experiment-content"><p>Cut a loop in half and get one big loop! Mind-bending topology demonstrated.</p><div class="concepts"><span class="concept-tag">Topology</span><span class="concept-tag">Geometry</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="math">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#F59E0B,#DB2777);"><span class="experiment-icon">🌀</span><h3>Fibonacci in Nature</h3><span class="experiment-badge">Class 8-12</span></div>
+                <div class="experiment-content"><p>Discover golden ratio in pinecones, sunflowers, shells! Math woven into nature.</p><div class="concepts"><span class="concept-tag">Fibonacci</span><span class="concept-tag">Golden Ratio</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="math">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#F59E0B,#DB2777);"><span class="experiment-icon">🃏</span><h3>Binary Card Trick</h3><span class="experiment-badge">Class 7-10</span></div>
+                <div class="experiment-content"><p>Guess any number 1-30 using just 5 cards! Binary system — computer language revealed.</p><div class="concepts"><span class="concept-tag">Binary</span><span class="concept-tag">Number Bases</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="math">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#F59E0B,#DB2777);"><span class="experiment-icon">📐</span><h3>Pythagorean Proof</h3><span class="experiment-badge">Class 8-10</span></div>
+                <div class="experiment-content"><p>Visual proof of a²+b²=c² using water! See the famous theorem come alive.</p><div class="concepts"><span class="concept-tag">Geometry</span><span class="concept-tag">Theorem Proof</span></div></div>
+            </div>
+            <div class="experiment-card fade-in" data-category="math">
+                <div class="experiment-header" style="background:linear-gradient(135deg,#F59E0B,#DB2777);"><span class="experiment-icon">🎲</span><h3>Probability Games</h3><span class="experiment-badge">Class 8-11</span></div>
+                <div class="experiment-content"><p>Dice, cards, and coins reveal probability secrets! Statistics becomes intuitive.</p><div class="concepts"><span class="concept-tag">Probability</span><span class="concept-tag">Statistics</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="booking" id="booking">
+        <div class="section-header fade-in">
+            <p class="section-tag">🗓️ Book Your Visit</p>
+            <h2 class="section-title">Experience the Magic Every Sunday</h2>
+            <p class="section-subtitle">Schools can book sessions for up to 50 students with hands-on experiments across all science branches.</p>
+        </div>
+
+        <div class="booking-container fade-in">
+            <div class="booking-info">
+                <div class="info-item"><div class="info-icon">📅</div><h4>Every Sunday</h4><p>10 AM - 1 PM<br>2 PM - 5 PM</p></div>
+                <div class="info-item"><div class="info-icon">👥</div><h4>Batch Size</h4><p>Up to 50 Students</p></div>
+                <div class="info-item"><div class="info-icon">🎓</div><h4>Class Levels</h4><p>Classes 6-12</p></div>
+                <div class="info-item"><div class="info-icon">⏱️</div><h4>Duration</h4><p>3 Hours / 15+ Experiments</p></div>
+            </div>
+
+            <form class="booking-form" onsubmit="handleSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group"><label>School Name *</label><input type="text" placeholder="Enter school name" required></div>
+                    <div class="form-group"><label>Contact Person *</label><input type="text" placeholder="Teacher/Coordinator" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Email *</label><input type="email" placeholder="your@school.edu" required></div>
+                    <div class="form-group"><label>Phone *</label><input type="tel" placeholder="+91 98765 43210" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Preferred Date *</label><input type="date" required></div>
+                    <div class="form-group"><label>Time Slot *</label><select required><option value="">Select slot</option><option>Morning (10 AM - 1 PM)</option><option>Afternoon (2 PM - 5 PM)</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Number of Students *</label><input type="number" placeholder="Max 50" min="10" max="50" required></div>
+                    <div class="form-group"><label>Class Level *</label><select required><option value="">Select level</option><option>Classes 6-8</option><option>Classes 9-10</option><option>Classes 11-12</option><option>Mixed (6-12)</option></select></div>
+                </div>
+                <div class="form-group"><label>Special Requirements</label><textarea rows="3" placeholder="Any specific experiments or accommodations..."></textarea></div>
+                <button type="submit" class="submit-btn">✨ Book Your Magic Session</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="section-header fade-in">
+            <p class="section-tag">💬 What Schools Say</p>
+            <h2 class="section-title">Transforming Education</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+                <span class="quote-icon">"</span>
+                <p class="testimonial-text">Our students couldn't stop talking about the DNA extraction for weeks! The way Polymath Academy makes complex concepts feel like magic is remarkable.</p>
+                <div class="testimonial-author"><div class="author-avatar">RS</div><div class="author-info"><h4>Mrs. Rekha Sharma</h4><span>Science HOD, DPS School</span></div></div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <span class="quote-icon">"</span>
+                <p class="testimonial-text">The integration of Physics, Chemistry, Biology, and Math aligns perfectly with NEP 2020 goals. A must-visit for every school!</p>
+                <div class="testimonial-author"><div class="author-avatar">AK</div><div class="author-info"><h4>Dr. Amit Kumar</h4><span>Principal, St. Xavier's</span></div></div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <span class="quote-icon">"</span>
+                <p class="testimonial-text">My daughter came home and performed three experiments for the whole family! The hands-on learning has sparked genuine love for science.</p>
+                <div class="testimonial-author"><div class="author-avatar">PM</div><div class="author-info"><h4>Mr. Pradeep Mehta</h4><span>Parent, Class 8 Student</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="section-header fade-in">
+            <p class="section-tag">📍 Find Us</p>
+            <h2 class="section-title">Let's Create Magic Together</h2>
+        </div>
+        <div class="contact-grid fade-in">
+            <div class="contact-item"><div class="contact-icon">📍</div><h4>Visit Our Lab</h4><p>Polymath Academy Science Lab<br>Your City, Your State</p></div>
+            <div class="contact-item"><div class="contact-icon">📞</div><h4>Call Us</h4><p><a href="tel:+919876543210">+91 98765 43210</a></p></div>
+            <div class="contact-item"><div class="contact-icon">📧</div><h4>Email Us</h4><p><a href="mailto:hello@polymathacademy.in">hello@polymathacademy.in</a></p></div>
+            <div class="contact-item"><div class="contact-icon">⏰</div><h4>Lab Hours</h4><p>Sunday: 10 AM - 5 PM<br>Weekdays: By Appointment</p></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">✨ Polymath Academy</div>
+        <p class="footer-tagline">"Where Science Becomes Magic"</p>
+        <div class="social-links">
+            <a href="#">📘</a><a href="#">📸</a><a href="#">🎬</a><a href="#">🐦</a><a href="#">💼</a>
+        </div>
+        <p class="copyright">© 2025 Polymath Academy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Create Stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;width:${Math.random()*3+1}px;height:${Math.random()*3+1}px;`;
+            starsContainer.appendChild(star);
+        }
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const progress = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+        });
+
+        // Fade In Animation
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Mobile Menu
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Filter Experiments
+        function filterExperiments(category) {
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.experiment-card').forEach(card => {
+                card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
+            });
+        }
+
+        // Form Submit
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('🎉 Thank you for your booking request!\n\nOur team will contact you within 24 hours to confirm your magical science session.\n\n✨ Polymath Academy');
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
